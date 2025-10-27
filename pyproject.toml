@@ -1,0 +1,18 @@
+[project]
+name = "langchain-course"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "black>=25.9.0",
+    "doppler-env>=0.3.1",
+    "langchain-monorepo",
+    "langchain-openai>=1.0.1",
+    "langchain-tavily>=0.2.12",
+    "pydantic>=2.12.3",
+    "python-dotenv>=1.2.1",
+]
+
+[tool.uv.sources]
+langchain-monorepo = { git = "https://github.com/langchain-ai/langchain.git", rev = "master" }
