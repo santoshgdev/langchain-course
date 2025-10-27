@@ -1,3 +1,4 @@
+from langchain_classic.agents import AgentExecutor
 from libs.langchain.langchain_classic.agents.react.agent import create_react_agent
 
 from doppler_map import doppler_map
@@ -29,12 +30,13 @@ agent = create_react_agent(
     tools=tools,
     prompt=react_prompt_with_format_instructions
 )
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
 
 def main():
-    result = agent.invoke(
+    result = agent_executor.invoke(
         {
-            "messages": [
+            "input": [
                 {
                     "role": "user",
                     "content": "search for 3 job postings for an ai engineer using langchain in the bay area on linkedin and list their details",
