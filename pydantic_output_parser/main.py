@@ -1,3 +1,5 @@
+from libs.langchain.langchain_classic.agents.react.agent import create_react_agent
+
 from doppler_map import doppler_map
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.prompts import PromptTemplate
@@ -7,7 +9,6 @@ from pydantic_output_parser.prompt import REACT_PROMPT_WITH_FORMAT_INSTRUCTIONS
 doppler_map()
 
 from langsmith import Client
-from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langchain_tavily import TavilySearch
 
@@ -23,10 +24,10 @@ react_prompt_with_format_instructions = PromptTemplate(
 ).partial(format_instructions=output_parser.get_format_instructions())
 
 
-agent = create_agent(
-    model=llm,
+agent = create_react_agent(
+    llm=llm,
     tools=tools,
-    response_format=AgentResponse,
+    prompt=react_prompt_with_format_instructions
 )
 
 
